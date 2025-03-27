@@ -77,7 +77,7 @@ export default {
     document: '项目文档',
     message: '消息',
     layoutSize: '布局大小',
-    selectTenant: '选择租户',
+    selectTenant: '选择公司',
     layoutSetting: '布局设置',
     personalCenter: '个人中心',
     logout: '退出登录'

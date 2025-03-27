@@ -44,23 +44,23 @@
         </div>
       </el-form-item>
       <el-checkbox v-model="loginForm.rememberMe" style="margin: 0 0 25px 0">{{ proxy.$t('login.rememberPassword') }}</el-checkbox>
-      <el-form-item style="float: right">
-        <el-button circle :title="proxy.$t('login.social.wechat')" @click="doSocialLogin('wechat')">
-          <svg-icon icon-class="wechat" />
-        </el-button>
-        <el-button circle :title="proxy.$t('login.social.maxkey')" @click="doSocialLogin('maxkey')">
-          <svg-icon icon-class="maxkey" />
-        </el-button>
-        <el-button circle :title="proxy.$t('login.social.topiam')" @click="doSocialLogin('topiam')">
-          <svg-icon icon-class="topiam" />
-        </el-button>
-        <el-button circle :title="proxy.$t('login.social.gitee')" @click="doSocialLogin('gitee')">
-          <svg-icon icon-class="gitee" />
-        </el-button>
-        <el-button circle :title="proxy.$t('login.social.github')" @click="doSocialLogin('github')">
-          <svg-icon icon-class="github" />
-        </el-button>
-      </el-form-item>
+<!--      <el-form-item style="float: right">-->
+<!--        <el-button circle :title="proxy.$t('login.social.wechat')" @click="doSocialLogin('wechat')">-->
+<!--          <svg-icon icon-class="wechat" />-->
+<!--        </el-button>-->
+<!--        <el-button circle :title="proxy.$t('login.social.maxkey')" @click="doSocialLogin('maxkey')">-->
+<!--          <svg-icon icon-class="maxkey" />-->
+<!--        </el-button>-->
+<!--        <el-button circle :title="proxy.$t('login.social.topiam')" @click="doSocialLogin('topiam')">-->
+<!--          <svg-icon icon-class="topiam" />-->
+<!--        </el-button>-->
+<!--        <el-button circle :title="proxy.$t('login.social.gitee')" @click="doSocialLogin('gitee')">-->
+<!--          <svg-icon icon-class="gitee" />-->
+<!--        </el-button>-->
+<!--        <el-button circle :title="proxy.$t('login.social.github')" @click="doSocialLogin('github')">-->
+<!--          <svg-icon icon-class="github" />-->
+<!--        </el-button>-->
+<!--      </el-form-item>-->
       <el-form-item style="width: 100%">
         <el-button :loading="loading" size="large" type="primary" style="width: 100%" @click.prevent="handleLogin">
           <span v-if="!loading">{{ proxy.$t('login.login') }}</span>
@@ -73,7 +73,7 @@
     </el-form>
     <!--  底部  -->
     <div class="el-login-footer">
-      <span>Copyright © 2018-2025 疯狂的狮子Li All Rights Reserved.</span>
+      <span>基于Spring Boot的自来水供应监控系统的设计与实现 --苏哲 </span>
     </div>
   </div>
 </template>
@@ -90,6 +90,7 @@ import { useI18n } from 'vue-i18n';
 const { proxy } = getCurrentInstance() as ComponentInternalInstance;
 
 const title = import.meta.env.VITE_APP_TITLE;
+console.log("title是",title)
 const userStore = useUserStore();
 const router = useRouter();
 const { t } = useI18n();

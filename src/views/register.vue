@@ -67,7 +67,7 @@
     </el-form>
     <!--  底部  -->
     <div class="el-register-footer">
-      <span>Copyright © 2018-2025 疯狂的狮子Li All Rights Reserved.</span>
+      <span>基于Spring Boot的自来水供应监控系统的设计与实现 --苏哲</span>
     </div>
   </div>
 </template>
