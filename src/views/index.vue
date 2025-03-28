@@ -7,13 +7,13 @@
 
     </el-row>
     <div style="display: flex; gap: 20px; justify-content: center;">
-      <div id="Source-Water-Mean-Pressure" style="flex: 1; max-width: 600px; height: 400px;"></div>
-      <div id="Discharge" style="flex: 1; max-width: 600px; height: 400px;"></div>
+      <div id="Source-Water-Mean-Pressure" style="flex: 1; max-width: 600px; height: 350px;"></div>
+      <div id="Discharge" style="flex: 1; max-width: 600px; height: 350px;"></div>
 
     </div>
     <div style="display: flex; gap: 20px; justify-content: center;">
-      <div id="pjsz" style="flex: 1; max-width: 600px; height: 500px;"></div>
-    <div id="category" style="flex: 1; max-width: 600px; height: 500px;"></div>
+      <div id="pjsz" style="flex: 1; max-width: 600px; height: 350px;"></div>
+    <div id="category" style="flex: 1; max-width: 600px; height: 350px;"></div>
     </div>
     <el-divider />
   </div>
@@ -21,27 +21,35 @@
 
 <script setup name="Index" lang="ts">
 import * as echarts from 'echarts';
+import {dqsl, listSensor, pjsy, pjsz, szpf} from "@/api/system/sensor";
 
-onMounted(() => {
+onMounted(async () => {
   type EChartsOption = echarts.EChartsOption;
 
   var chartDom = document.getElementById('pjsz')!;
   var myChart = echarts.init(chartDom);
   var option: EChartsOption;
+
+  const res = await pjsz();
+  console.log("返回值是",res)
+  const date = res.date;
+  const  num = res.num;
+
+
   option = {
     title: {
       text: '平均水质'
     },
     xAxis: {
       type: 'category',
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      data: date
     },
     yAxis: {
       type: 'value'
     },
     series: [
       {
-        data: [820, 932, 901, 934, 1290, 1330, 1320],
+        data: num,
         type: 'line',
         smooth: true
       }
@@ -53,7 +61,7 @@ onMounted(() => {
 })
 
 
-onMounted(() => {
+onMounted(async () => {
 
   type EChartsOption = echarts.EChartsOption;
 
@@ -61,20 +69,27 @@ onMounted(() => {
   var myChart = echarts.init(chartDom);
   var option: EChartsOption;
 
+
+  const res = await szpf();
+  console.log("水质评分",res)
+  const value = res.value;
+  const name = res.name;
+
+
   option = {
     title: {
       text: '水质评分'
     },
     xAxis: {
       type: 'category',
-      data: ['1号传感器', '2号传感器', '3号传感器', '4号传感器', '5号传感器']
+      data: name
     },
     yAxis: {
       type: 'value'
     },
     series: [
       {
-        data: [99, 20, 30, 50, 60, 40, 40],
+        data: value,
         type: 'bar'
       }
     ]
@@ -84,7 +99,7 @@ onMounted(() => {
 
 })
 
-onMounted(() => {
+onMounted( async() => {
 
   type EChartsOption = echarts.EChartsOption;
 
@@ -92,6 +107,14 @@ onMounted(() => {
   var myChart = echarts.init(chartDom);
   var option: EChartsOption;
 
+
+  const rawData = await dqsl();
+
+  const formattedData = rawData.map(item => ({
+    name: item.name,  // 传感器名称字段
+    value: item.value    // 水流量数值字段
+  }));
+  console.log("水流的值是",formattedData)
   option = {
     title: {
       text: '当前水流量'
@@ -128,13 +151,7 @@ onMounted(() => {
         labelLine: {
           show: false
         },
-        data: [
-          { value: 1048, name: '1号传感器' },
-          { value: 735, name: '2号传感器' },
-          { value: 580, name: '3号传感器' },
-          { value: 484, name: '4号传感器' },
-          { value: 300, name: '5号传感器' }
-        ]
+        data: formattedData
       }
     ]
   };
@@ -147,26 +164,31 @@ onMounted(() => {
 })
 
 
-onMounted(() => {
+onMounted(async() => {
   type EChartsOption = echarts.EChartsOption;
 
   var chartDom = document.getElementById('Source-Water-Mean-Pressure')!;
   var myChart = echarts.init(chartDom);
   var option: EChartsOption;
+  const res = await pjsy();
+  console.log("水源",res)
+  const date = res.date;
+  const num = res.num;
+
   option = {
     title: {
       text: '水源平均水压'
     },
     xAxis: {
       type: 'category',
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      data: date
     },
     yAxis: {
       type: 'value'
     },
     series: [
       {
-        data: [820, 932, 901, 934, 1290, 1330, 1320],
+        data: num,
         type: 'line',
         smooth: true
       }

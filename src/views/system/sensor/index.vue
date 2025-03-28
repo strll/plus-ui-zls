@@ -49,7 +49,7 @@
         <el-table-column label="传感器状态" align="center" prop="state" />
         <el-table-column label="位置" align="center" prop="place" />
         <el-table-column label="备注" align="center" prop="remarks" />
-        <el-table-column label="名称" align="center" prop="name" />
+
         <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
           <template #default="scope">
             <el-tooltip content="修改" placement="top">
@@ -67,6 +67,9 @@
     <!-- 添加或修改硬件对话框 -->
     <el-dialog :title="dialog.title" v-model="dialog.visible" width="500px" append-to-body>
       <el-form ref="sensorFormRef" :model="form" :rules="rules" label-width="80px">
+        <el-form-item label="名称" prop="name">
+          <el-input v-model="form.name" placeholder="请输入名称" />
+        </el-form-item>
         <el-form-item label="传感器状态" prop="state">
           <el-input v-model="form.state" placeholder="请输入传感器状态" />
         </el-form-item>
@@ -76,9 +79,7 @@
         <el-form-item label="备注" prop="remarks">
           <el-input v-model="form.remarks" type="textarea" placeholder="请输入内容" />
         </el-form-item>
-        <el-form-item label="名称" prop="name">
-          <el-input v-model="form.name" placeholder="请输入名称" />
-        </el-form-item>
+
       </el-form>
       <template #footer>
         <div class="dialog-footer">

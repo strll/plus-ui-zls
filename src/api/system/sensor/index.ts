@@ -2,6 +2,47 @@ import request from '@/utils/request';
 import { AxiosPromise } from 'axios';
 import { SensorVO, SensorForm, SensorQuery } from '@/api/system/sensor/types';
 
+
+
+export const pjsy = (): AxiosPromise<any> => {
+  return request({
+    url: '/system/zxt/pjsy',
+    method: 'get'
+
+  })as unknown as Promise<any>;
+};
+
+
+export const pjsz = (): AxiosPromise<any> => {
+  return request({
+    url: '/system/zxt/pjsz',
+    method: 'get'
+
+  });
+};
+
+export const dqsl = (): Promise<any[]> => {
+  return request({
+    url: '/system/zxt/dqsl',
+    method: 'get'
+  }) as unknown as Promise<any[]>; // 双重断言
+};
+
+export const szpf = (): Promise<any> => {
+  return request({
+    url: '/system/zxt/szpf',
+    method: 'get'
+  }) as unknown as Promise<any>;
+};
+
+
+
+
+
+
+
+
+
 /**
  * 查询硬件列表
  * @param query
